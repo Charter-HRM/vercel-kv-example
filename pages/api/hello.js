@@ -1,5 +1,6 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-export default function handler(req, res) {
-  res.status(200).json({ name: 'John Doe' })
+import kv from '@vercel/kv';
+ 
+export default async function handler(request, response) {
+  const user = await kv.hgetall('user:me');
+  return response.status(200).json(user);
 }
